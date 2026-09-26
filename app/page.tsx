@@ -12,8 +12,23 @@ import { useTheme } from "next-themes";
 // Create an animated Link component for Framer Motion
 const MotionLink = motion.create(Link);
 
-// Mock data for current project cards with external/internal links added
-const currentProjects = [
+type ProjectMediaType = "photo" | "interface" | "transparent" | "mobile" | "poster";
+
+type Project = {
+  id: number;
+  title: string;
+  category: string;
+  year: string;
+  image: string;
+  fallbackGradient: string;
+  url: string;
+  mediaType: ProjectMediaType;
+  mediaScale: string;
+};
+
+// Each project can use a different media treatment so screenshots, photos,
+// mobile UI and transparent graphics don't get awkwardly cropped.
+const currentProjects: Project[] = [
   {
     id: 1,
     title: "GoalHyke",
@@ -21,7 +36,9 @@ const currentProjects = [
     year: "2026",
     image: "/projects/Goalhyke.jpg",
     fallbackGradient: "from-emerald-500/20 via-teal-900/30 to-transparent",
-    url: "https://goalhyke.com", // Add your link here
+    url: "https://goalhyke.com",
+    mediaType: "interface",
+    mediaScale: "scale-[0.86]",
   },
   {
     id: 2,
@@ -31,6 +48,8 @@ const currentProjects = [
     image: "/projects/letsellify.jpg",
     fallbackGradient: "from-blue-600/30 via-indigo-900/20 to-transparent",
     url: "#",
+    mediaType: "interface",
+    mediaScale: "scale-[0.86]",
   },
   {
     id: 3,
@@ -40,6 +59,8 @@ const currentProjects = [
     image: "/projects/contrihub-3d-graphic.png",
     fallbackGradient: "from-purple-600/30 via-fuchsia-900/20 to-transparent",
     url: "https://contribhub.netlify.app/",
+    mediaType: "transparent",
+    mediaScale: "scale-[0.72]",
   },
   {
     id: 4,
@@ -49,6 +70,8 @@ const currentProjects = [
     image: "/projects/Habtech.jpg",
     fallbackGradient: "from-amber-500/20 via-orange-900/20 to-transparent",
     url: "https://habtechconstruction.com/",
+    mediaType: "photo",
+    mediaScale: "scale-100",
   },
   {
     id: 5,
@@ -58,6 +81,8 @@ const currentProjects = [
     image: "/projects/Bida Forum.jpg",
     fallbackGradient: "from-rose-500/20 via-pink-900/20 to-transparent",
     url: "https://bida-forum.vercel.app/",
+    mediaType: "interface",
+    mediaScale: "scale-[0.86]",
   },
   {
     id: 6,
@@ -67,6 +92,8 @@ const currentProjects = [
     image: "/projects/sparkle-eye.jpg",
     fallbackGradient: "from-indigo-500/20 via-blue-900/20 to-transparent",
     url: "#",
+    mediaType: "interface",
+    mediaScale: "scale-[0.82]",
   },
   {
     id: 7,
@@ -76,6 +103,8 @@ const currentProjects = [
     image: "/projects/awa-yoruba.png",
     fallbackGradient: "from-cyan-500/20 via-sky-900/20 to-transparent",
     url: "#",
+    mediaType: "poster",
+    mediaScale: "scale-[0.78]",
   },
   {
     id: 8,
@@ -85,6 +114,8 @@ const currentProjects = [
     image: "/projects/plugins.jpg",
     fallbackGradient: "from-yellow-500/20 via-amber-900/20 to-transparent",
     url: "#",
+    mediaType: "interface",
+    mediaScale: "scale-[0.82]",
   },
 ];
 
@@ -322,9 +353,23 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-3.5 lg:grid-cols-4">
               {currentProjects.map((project, idx) => {
                 const isExternal = project.url.startsWith("http");
+
+                const mediaFrameClass = {
+                  photo: "bg-zinc-100 dark:bg-zinc-900",
+                  interface: "bg-zinc-100/80 dark:bg-zinc-950/60",
+                  transparent: "bg-transparent",
+                  mobile: "bg-zinc-100/70 dark:bg-zinc-950/50",
+                  poster: "bg-zinc-100 dark:bg-zinc-950/40",
+                }[project.mediaType];
+
+                const mediaFitClass =
+                  project.mediaType === "photo"
+                    ? "object-cover"
+                    : "object-contain";
+
                 return (
                   <MotionLink
                     key={project.id}
@@ -335,33 +380,64 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, delay: idx * 0.04 }}
                     whileHover={{ scale: 1.025 }}
-                    className="group relative aspect-square cursor-pointer overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-100 dark:bg-zinc-900/60 shadow-md flex items-center justify-center p-2"
+                    whileTap={{ scale: 0.98 }}
+                    className="group relative aspect-square cursor-pointer overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 p-2 shadow-md dark:border-zinc-800/80 dark:bg-zinc-900/60"
                   >
-                    {/* Full width image container */}
-                    <div className="relative w-full h-24 overflow-hidden rounded-lg transition-transform duration-500 group-hover:scale-95">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 50vw, 25vw"
-                      />
+                    {/* Shorter media area keeps tall/wide assets from taking over the card. */}
+                    <div
+                      className={`absolute inset-x-3 top-3 bottom-12 flex items-center justify-center overflow-hidden rounded-xl ${mediaFrameClass}`}
+                    >
+                      <div
+                        className={`relative h-full w-full ${project.mediaScale} transition-transform duration-500 group-hover:scale-[1.03]`}
+                      >
+                        <Image
+                          src={project.image}
+                          alt={`${project.title} project`}
+                          fill
+                          className={`rounded-lg ${mediaFitClass}`}
+                          sizes="(max-width: 640px) 44vw, (max-width: 1024px) 30vw, 22vw"
+                        />
+                      </div>
                     </div>
 
-                    {/* Hover Overlay */}
-                    <div className={`absolute inset-0 bg-linear-to-br ${project.fallbackGradient} bg-zinc-950/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 p-4 flex flex-col justify-between z-10`}>
-                      <div className="flex items-center justify-between">
-                        <span className="font-mono text-[9px] text-zinc-400 tracking-widest uppercase font-semibold">
+                    {/* Mobile: always show the project identity because touch devices don't have hover. */}
+                    <div className="absolute inset-x-0 bottom-0 z-20 bg-linear-to-t from-black/90 via-black/55 to-transparent p-3 pt-8 md:hidden">
+                      <span className="block font-mono text-[8px] font-semibold uppercase tracking-widest text-zinc-300">
+                        {project.category}
+                      </span>
+                      <div className="mt-0.5 flex items-end justify-between gap-2">
+                        <div>
+                          <span className="block font-mono text-[9px] font-medium tracking-wider text-emerald-400">
+                            {project.year}
+                          </span>
+                          <h4 className="font-(family-name:--font-bricolage) text-sm font-bold leading-snug tracking-tight text-white">
+                            {project.title}
+                          </h4>
+                        </div>
+                        {isExternal && (
+                          <ArrowUpRight className="mb-0.5 h-4 w-4 shrink-0 text-white" />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Desktop hover overlay. */}
+                    <div
+                      className={`absolute inset-0 z-10 hidden bg-linear-to-br ${project.fallbackGradient} bg-zinc-950/90 p-4 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 md:flex md:flex-col md:justify-between`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono text-[9px] font-semibold uppercase tracking-widest text-zinc-400">
                           {project.category}
                         </span>
-                        <ArrowUpRight className="h-4 w-4 text-white opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        {isExternal && (
+                          <ArrowUpRight className="h-4 w-4 shrink-0 text-white transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                        )}
                       </div>
 
                       <div>
-                        <span className="font-mono text-[10px] text-emerald-400 font-medium tracking-wider block">
+                        <span className="block font-mono text-[10px] font-medium tracking-wider text-emerald-400">
                           {project.year}
                         </span>
-                        <h4 className="font-(family-name:--font-bricolage) text-base sm:text-lg font-bold text-white tracking-tight leading-snug mt-0.5">
+                        <h4 className="mt-0.5 font-(family-name:--font-bricolage) text-base font-bold leading-snug tracking-tight text-white sm:text-lg">
                           {project.title}
                         </h4>
                       </div>
