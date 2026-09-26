@@ -198,6 +198,10 @@ export default function Home() {
 
   const activeTestimonial = testimonials[currentTestimonialIdx];
 
+  // Small per-card rotations create the editorial/3D collage without making
+  // the layout unstable. On touch devices these remain subtle and static.
+  const cardRotations = [-2.2, 1.4, -1.2, 2, -1.6, 1.2, -2, 1.6];
+
   // Framer Motion Animation Variants for the Testimonial Card
   const cardVariants: Variants = {
     initial: (dir: number) => ({
@@ -230,7 +234,7 @@ export default function Home() {
       <div className="mx-auto flex max-w-6xl flex-col md:flex-row">
         
         {/* ================= LEFT SIDEBAR (FIXED / STICKY) ================= */}
-       <aside className="w-full md:w-64 shrink-0 p-8 md:sticky md:top-0 md:h-screen flex flex-col justify-between overflow-y-auto">
+       <aside className="w-full shrink-0 p-5 sm:p-8 md:w-64 md:sticky md:top-0 md:h-screen flex flex-col justify-between overflow-y-auto">
   <div>
     {/* Profile Avatar */}
     <div className="relative h-16 w-16 overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-700/80 mb-6 shadow-md">
@@ -244,7 +248,7 @@ export default function Home() {
     </div>
 
     {/* Name & Bio */}
-    <h1 className="font-(family-name:--font-bricolage)] text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+    <h1 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 dark:text-white">
       Oluwatosin Adesoro
     </h1>
     <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mt-2 mb-8">
@@ -297,10 +301,10 @@ export default function Home() {
 </aside>
 
         {/* ================= MAIN SCROLLABLE AREA ================= */}
-        <main className="flex-1 p-8 md:p-12 overflow-y-auto">
+        <main className="min-w-0 flex-1 overflow-y-auto px-4 py-6 sm:px-6 sm:py-8 md:p-12">
           
           {/* Top Bar */}
-          <header className="flex items-center justify-between pb-10">
+          <header className="flex items-center justify-between pb-8 sm:pb-10">
             <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
               <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
                 <SiYoutube className="h-4 w-4" />
@@ -333,11 +337,11 @@ export default function Home() {
           </header>
 
           {/* Hero Section */}
-          <section className="mb-14 max-w-2xl">
-            <h2 className="font-(family-name:--font-bricolage) text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
+          <section className="mb-12 max-w-2xl sm:mb-14">
+            <h2 className="font-heading text-3xl sm:text-4xl font-normal text-zinc-900 dark:text-white tracking-tight mb-4">
               Hi, I&apos;m Oluwatosin Adesoro.
             </h2>
-            <p className="text-zinc-600 dark:text-zinc-300 text-base leading-relaxed">
+            <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-300 sm:text-base sm:leading-relaxed">
               Right now, I&apos;m focusing on building <strong className="text-zinc-900 dark:text-white font-semibold">Ergonomic</strong> and high-trust digital products. Alongside that, I work on contract product design, design systems, and frontend tools for high-growth tech ventures.
             </p>
           </section>
@@ -353,7 +357,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-3.5 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-4.5">
               {currentProjects.map((project, idx) => {
                 const isExternal = project.url.startsWith("http");
 
@@ -376,72 +380,114 @@ export default function Home() {
                     href={project.url}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: idx * 0.04 }}
-                    whileHover={{ scale: 1.025 }}
+                    transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ y: -8, rotate: 0, scale: 1.018 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group relative aspect-square cursor-pointer overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 p-2 shadow-md dark:border-zinc-800/80 dark:bg-zinc-900/60"
+                    style={{ perspective: "1200px" }}
+                    className="group relative aspect-square min-w-0 cursor-pointer overflow-visible rounded-[1.35rem]"
                   >
-                    {/* Shorter media area keeps tall/wide assets from taking over the card. */}
-                    <div
-                      className={`absolute inset-x-3 top-3 bottom-12 flex items-center justify-center overflow-hidden rounded-xl ${mediaFrameClass}`}
+                    <motion.div
+                      initial={{ rotate: cardRotations[idx] }}
+                      animate={{ rotate: cardRotations[idx] }}
+                      whileHover={{ rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                      style={{ transformStyle: "preserve-3d" }}
+                      className="relative h-full w-full overflow-visible rounded-[1.35rem]"
                     >
+                      {/* Physical-looking depth layers */}
                       <div
-                        className={`relative h-full w-full ${project.mediaScale} transition-transform duration-500 group-hover:scale-[1.03]`}
+                        aria-hidden="true"
+                        className="absolute inset-1 rounded-[1.25rem] border border-black/10 bg-zinc-200/80 shadow-xl dark:border-white/5 dark:bg-zinc-800/70"
+                        style={{ transform: "translateZ(-28px) translateY(10px) scale(.94)" }}
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 rounded-[1.35rem] border border-black/10 bg-zinc-100 shadow-2xl dark:border-white/10 dark:bg-zinc-900"
+                        style={{ transform: "translateZ(-14px) translateY(5px) scale(.975)" }}
+                      />
+
+                      {/* Main card plane */}
+                      <div
+                        className="relative h-full w-full overflow-hidden rounded-[1.35rem] border border-zinc-200/90 bg-zinc-100/95 p-2 shadow-[0_24px_55px_-24px_rgba(0,0,0,0.45)] dark:border-zinc-700/70 dark:bg-zinc-900/95 dark:shadow-[0_28px_65px_-25px_rgba(0,0,0,0.8)]"
+                        style={{ transform: "translateZ(0)" }}
                       >
-                        <Image
-                          src={project.image}
-                          alt={`${project.title} project`}
-                          fill
-                          className={`rounded-lg ${mediaFitClass}`}
-                          sizes="(max-width: 640px) 44vw, (max-width: 1024px) 30vw, 22vw"
+                        {/* Soft ambient glow behind the artwork */}
+                        <div
+                          aria-hidden="true"
+                          className={`absolute -inset-4 bg-linear-to-br ${project.fallbackGradient} opacity-60 blur-2xl transition-opacity duration-500 group-hover:opacity-100`}
                         />
-                      </div>
-                    </div>
 
-                    {/* Mobile: always show the project identity because touch devices don't have hover. */}
-                    <div className="absolute inset-x-0 bottom-0 z-20 bg-linear-to-t from-black/90 via-black/55 to-transparent p-3 pt-8 md:hidden">
-                      <span className="block font-mono text-[8px] font-semibold uppercase tracking-widest text-zinc-300">
-                        {project.category}
-                      </span>
-                      <div className="mt-0.5 flex items-end justify-between gap-2">
-                        <div>
-                          <span className="block font-mono text-[9px] font-medium tracking-wider text-emerald-400">
-                            {project.year}
-                          </span>
-                          <h4 className="font-(family-name:--font-bricolage) text-sm font-bold leading-snug tracking-tight text-white">
-                            {project.title}
-                          </h4>
+                        {/* Floating media plane */}
+                        <div
+                          className={`absolute inset-x-2.5 top-2.5 bottom-11 flex items-center justify-center overflow-hidden rounded-[1rem] ${mediaFrameClass}`}
+                          style={{ transform: "translateZ(30px)" }}
+                        >
+                          <div
+                            className={`relative h-full w-full ${project.mediaScale} transition-transform duration-500 ease-out group-hover:scale-[1.045]`}
+                          >
+                            <Image
+                              src={project.image}
+                              alt={`${project.title} project`}
+                              fill
+                              className={`rounded-xl ${mediaFitClass}`}
+                              sizes="(max-width: 640px) 43vw, (max-width: 1024px) 29vw, 20vw"
+                            />
+                          </div>
                         </div>
-                        {isExternal && (
-                          <ArrowUpRight className="mb-0.5 h-4 w-4 shrink-0 text-white" />
-                        )}
-                      </div>
-                    </div>
 
-                    {/* Desktop hover overlay. */}
-                    <div
-                      className={`absolute inset-0 z-10 hidden bg-linear-to-br ${project.fallbackGradient} bg-zinc-950/90 p-4 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 md:flex md:flex-col md:justify-between`}
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-mono text-[9px] font-semibold uppercase tracking-widest text-zinc-400">
-                          {project.category}
-                        </span>
-                        {isExternal && (
-                          <ArrowUpRight className="h-4 w-4 shrink-0 text-white transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                        )}
-                      </div>
+                        {/* Glass edge / highlight */}
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-2 rounded-[1.05rem] border border-white/20 opacity-70 dark:border-white/10"
+                          style={{ transform: "translateZ(38px)" }}
+                        />
 
-                      <div>
-                        <span className="block font-mono text-[10px] font-medium tracking-wider text-emerald-400">
-                          {project.year}
-                        </span>
-                        <h4 className="mt-0.5 font-(family-name:--font-bricolage) text-base font-bold leading-snug tracking-tight text-white sm:text-lg">
-                          {project.title}
-                        </h4>
+                        {/* Mobile identity — always visible on touch-sized layouts */}
+                        <div className="absolute inset-x-0 bottom-0 z-20 bg-linear-to-t from-black/95 via-black/65 to-transparent p-2.5 pt-8 sm:p-3 sm:pt-10 md:hidden">
+                          <span className="block truncate font-mono text-[7px] font-semibold uppercase tracking-[0.14em] text-zinc-300 sm:text-[8px]">
+                            {project.category}
+                          </span>
+                          <div className="mt-0.5 flex items-end justify-between gap-1.5">
+                            <div className="min-w-0">
+                              <span className="block font-mono text-[8px] font-medium tracking-wider text-emerald-400 sm:text-[9px]">
+                                {project.year}
+                              </span>
+                              <h4 className="font-heading truncate text-sm font-normal leading-snug tracking-tight text-white sm:text-base">
+                                {project.title}
+                              </h4>
+                            </div>
+                            {isExternal && (
+                              <ArrowUpRight className="mb-0.5 h-3.5 w-3.5 shrink-0 text-white sm:h-4 sm:w-4" />
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Desktop hover information panel */}
+                        <div
+                          className={`absolute inset-0 z-30 hidden bg-linear-to-br ${project.fallbackGradient} bg-zinc-950/90 p-4 opacity-0 backdrop-blur-md transition-all duration-300 group-hover:opacity-100 md:flex md:flex-col md:justify-between`}
+                          style={{ transform: "translateZ(48px)" }}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-mono text-[9px] font-semibold uppercase tracking-widest text-zinc-400">
+                              {project.category}
+                            </span>
+                            {isExternal && (
+                              <ArrowUpRight className="h-4 w-4 shrink-0 text-white transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                            )}
+                          </div>
+                          <div>
+                            <span className="block font-mono text-[10px] font-medium tracking-wider text-emerald-400">
+                              {project.year}
+                            </span>
+                            <h4 className="mt-0.5 font-heading text-sm font-normal leading-snug tracking-tight text-white sm:text-lg">
+                              {project.title}
+                            </h4>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </MotionLink>
                 );
               })}
@@ -453,12 +499,12 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0 overflow-hidden border border-zinc-200 dark:border-zinc-800/60 rounded-xl">
               
               {/* Row 1, Tile 1 */}
-              <div className="bg-[#EAEAEA] text-zinc-900 p-8 flex items-center justify-center min-h-(200px)">
+              <div className="bg-[#EAEAEA] text-zinc-900 p-8 flex items-center justify-center min-h-50">
                 <h3 className="text-xl font-medium tracking-tight">Stats &amp; Facts</h3>
               </div>
 
               {/* Row 1, Tile 2 */}
-              <div className="bg-[#2B2B2E] text-white p-8 flex flex-col justify-center items-start min-h-(200px)">
+              <div className="bg-[#2B2B2E] text-white p-8 flex flex-col justify-center items-start min-h-50">
                 <span className="text-5xl font-extrabold tracking-tight">4+</span>
                 <span className="font-mono text-xs tracking-widest text-zinc-400 mt-2 uppercase">
                   YEARS IN DESIGN
@@ -466,7 +512,7 @@ export default function Home() {
               </div>
 
               {/* Row 1, Tile 3 */}
-              <div className="bg-[#6B1854] p-4 flex items-center justify-center min-h-(200px) h-full relative overflow-hidden">
+              <div className="bg-[#6B1854] p-4 flex items-center justify-center min-h-50 h-full relative overflow-hidden">
                 <div className="relative w-full h-[180px] overflow-hidden rounded-lg bg-white/10 p-2 shadow-lg">
                   <Image
                     src="/projects/Bida Forum.jpg"
@@ -479,7 +525,7 @@ export default function Home() {
               </div>
 
               {/* Row 2, Tile 1 */}
-              <div className="bg-[#0A0A0A] p-8 flex flex-col justify-between min-h-(220px)">
+              <div className="bg-[#0A0A0A] p-8 flex flex-col justify-between min-h-55">
                 <p className="text-sm text-zinc-300 leading-relaxed max-w-xs">
                   SaaS dashboards, mobile apps, e-commerce — each one designed to solve real problems.
                 </p>
@@ -494,7 +540,7 @@ export default function Home() {
               </div>
 
               {/* Row 2, Tile 2 */}
-              <div className="bg-[#0A4B82] p-4 flex items-center justify-center min-h-(220px) h-full relative overflow-hidden">
+              <div className="bg-[#0A4B82] p-4 flex items-center justify-center min-h-55 h-full relative overflow-hidden">
                 <div className="relative w-full h-[180px]">
                   <Image
                     src="/projects/stats.jpg"
@@ -507,7 +553,7 @@ export default function Home() {
               </div>
 
               {/* Row 2, Tile 3 */}
-              <div className="flex flex-col min-h-(220px)">
+              <div className="flex flex-col min-h-55">
                 <div className="bg-[#0A0A0A] p-6 flex flex-col justify-center items-start flex-1 border-b border-zinc-800/40">
                   <span className="text-4xl font-extrabold text-white tracking-tight">10+</span>
                   <span className="font-mono text-[10px] tracking-widest text-zinc-400 mt-1 uppercase">
@@ -536,10 +582,10 @@ export default function Home() {
             </div>
 
             {/* Container */}
-            <div className="relative rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/30 p-8 sm:p-12 flex flex-col items-center justify-between min-h-(420px)">
+            <div className="relative rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/30 p-8 sm:p-12 flex flex-col items-center justify-between min-h-105">
               
               {/* Stacked Cards Wrapper */}
-              <div className="relative w-full max-w-lg my-auto pt-4 min-h-(260px) flex items-center justify-center">
+              <div className="relative w-full max-w-lg my-auto pt-4 min-h-65 flex items-center justify-center">
                 
                 {/* Stack effect background card 2 */}
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-[88%] h-full rounded-2xl border border-zinc-200 dark:border-zinc-800/40 bg-zinc-100 dark:bg-zinc-900/40 shadow-sm pointer-events-none" />
@@ -636,7 +682,7 @@ export default function Home() {
           </section>
 
           {/* NEW FOOTER Section */}
-          <footer className="mt-32 pt-20 pb-8 border-t border-zinc-200 dark:border-neutral-800/60 relative overflow-hidden">
+          <footer className="mt-24 pt-14 pb-8 sm:mt-32 sm:pt-20 border-t border-zinc-200 dark:border-neutral-800/60 relative overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-zinc-600 dark:text-neutral-400 text-sm leading-relaxed max-w-4xl relative z-10">
               <div className="space-y-4 font-light">
                 <p>
