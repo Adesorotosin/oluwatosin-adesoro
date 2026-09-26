@@ -347,7 +347,7 @@ export default function Home() {
           </section>
 
           {/* Current Projects Grid */}
-          <section className="mb-20">
+          <section id="works" className="mb-20 scroll-mt-8">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-mono text-[11px] tracking-[0.2em] text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
                 CURRENT PROJECTS
@@ -495,7 +495,7 @@ export default function Home() {
           </section>
 
           {/* ================= STATS & FACTS BENTO GRID ================= */}
-          <section className="mb-16">
+          <section id="timeline" className="mb-16 scroll-mt-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0 overflow-hidden border border-zinc-200 dark:border-zinc-800/60 rounded-xl">
               
               {/* Row 1, Tile 1 */}
@@ -571,7 +571,7 @@ export default function Home() {
           </section>
 
           {/* ================= TESTIMONIALS SECTION ================= */}
-          <section className="mb-16">
+          <section id="story" className="mb-16 scroll-mt-8">
             <div className="mb-6">
               <h3 className="text-xl font-semibold text-zinc-900 dark:text-white tracking-tight">
                 Testimonials
@@ -678,6 +678,86 @@ export default function Home() {
                 </button>
               </div>
 
+            </div>
+          </section>
+
+          {/* ================= PLAYGROUND ================= */}
+          <section id="playground" className="mb-20 scroll-mt-8">
+            <div className="mb-6">
+              <p className="font-mono text-[11px] tracking-[0.2em] text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
+                PLAYGROUND
+              </p>
+              <h3 className="mt-2 font-heading text-3xl sm:text-4xl font-normal tracking-tight text-zinc-900 dark:text-white">
+                Experiments, ideas &amp; things I&apos;m learning.
+              </h3>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                Not everything starts as a client project. This is where I explore interfaces, AI-assisted workflows, visual systems, product ideas and small experiments that help me become a better designer and builder.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {[
+                ["AI + Product Experiments", "Exploring practical AI interfaces, agents and product concepts.", "01"],
+                ["Design Systems", "Testing typography, interaction patterns and reusable UI systems.", "02"],
+                ["Frontend Builds", "Turning selected design ideas into working interfaces with modern web tools.", "03"],
+                ["Product Ideas", "Early concepts shaped around real problems worth solving.", "04"],
+              ].map(([title, description, number]) => (
+                <motion.div
+                  key={number}
+                  whileHover={{ y: -4 }}
+                  className="group rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition-all duration-300 hover:border-zinc-300 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900/40 dark:hover:border-zinc-700"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="font-mono text-[10px] tracking-widest text-zinc-400">{number}</span>
+                    <ArrowUpRight className="h-4 w-4 text-zinc-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </div>
+                  <h4 className="mt-8 text-base font-semibold tracking-tight text-zinc-900 dark:text-white">{title}</h4>
+                  <p className="mt-2 text-xs leading-5 text-zinc-500 dark:text-zinc-400">{description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
+          {/* ================= ABOUT ================= */}
+          <section id="about" className="mb-20 scroll-mt-8">
+            <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-10 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start">
+                <div>
+                  <p className="font-mono text-[11px] tracking-[0.2em] text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
+                    ABOUT
+                  </p>
+                  <h3 className="mt-3 font-heading text-3xl sm:text-4xl font-normal tracking-tight text-zinc-900 dark:text-white">
+                    Designing useful things for real people.
+                  </h3>
+                </div>
+
+                <div className="space-y-5 text-sm leading-7 text-zinc-600 dark:text-zinc-300">
+                  <p>
+                    I work across product design, UX strategy, design systems and frontend implementation — connecting thoughtful interface design with the practical realities of building digital products.
+                  </p>
+                  <p>
+                    My approach sits between empathy and execution: understand the people using a product, simplify the problem, design the experience, then help turn the idea into something that actually works.
+                  </p>
+                  <p>
+                    I enjoy working with ambitious teams and founders building products that solve meaningful problems, especially where good design can create more trust, clarity and momentum.
+                  </p>
+
+                  <div className="grid grid-cols-1 gap-3 pt-3 sm:grid-cols-3">
+                    <div className="border-l border-zinc-300 pl-3 dark:border-zinc-700">
+                      <span className="block font-mono text-[9px] uppercase tracking-widest text-zinc-400">Focus</span>
+                      <span className="mt-1 block text-xs font-medium text-zinc-900 dark:text-white">Product &amp; UX</span>
+                    </div>
+                    <div className="border-l border-zinc-300 pl-3 dark:border-zinc-700">
+                      <span className="block font-mono text-[9px] uppercase tracking-widest text-zinc-400">Build</span>
+                      <span className="mt-1 block text-xs font-medium text-zinc-900 dark:text-white">Design + Frontend</span>
+                    </div>
+                    <div className="border-l border-zinc-300 pl-3 dark:border-zinc-700">
+                      <span className="block font-mono text-[9px] uppercase tracking-widest text-zinc-400">Based</span>
+                      <span className="mt-1 block text-xs font-medium text-zinc-900 dark:text-white">Nigeria · Global</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
