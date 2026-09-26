@@ -47,7 +47,7 @@ export default function WorksPage() {
       <div className="mx-auto flex max-w-6xl flex-col md:flex-row">
         
         {/* ================= LEFT SIDEBAR ================= */}
-        <aside className="w-full md:w-64 shrink-0 p-8 md:sticky md:top-0 md:h-screen flex flex-col justify-between overflow-y-auto">
+        <aside className="w-full shrink-0 p-5 sm:p-8 md:w-64 md:sticky md:top-0 md:h-screen flex flex-col justify-between overflow-y-auto">
           <div>
             {/* Profile Avatar */}
             <div className="relative h-16 w-16 overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-700/80 mb-6 shadow-md">
@@ -61,7 +61,7 @@ export default function WorksPage() {
             </div>
 
             {/* Name & Bio */}
-            <h1 className="font-(family-name:--font-bricolage)] text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            <h1 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 dark:text-white">
               Oluwatosin Adesoro
             </h1>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mt-2 mb-8">
@@ -118,7 +118,7 @@ export default function WorksPage() {
         </aside>
 
         {/* ================= MAIN CONTENT ================= */}
-        <main className="flex-1 p-8 md:p-12 overflow-y-auto">
+        <main className="min-w-0 flex-1 overflow-y-auto px-4 py-6 sm:px-6 sm:py-8 md:p-12">
           
           {/* Top Bar */}
           <header className="flex items-center justify-between pb-8">
@@ -150,7 +150,7 @@ export default function WorksPage() {
 
           {/* Header Section */}
           <section className="mb-8 max-w-xl">
-            <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-3">
+            <h1 className="font-heading text-3xl sm:text-4xl font-normal tracking-tight text-zinc-900 dark:text-white mb-3">
               Works
             </h1>
             <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
@@ -191,7 +191,7 @@ export default function WorksPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
-                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
               >
                 {projectsData.map((project, idx) => (
                   <motion.a
