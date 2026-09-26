@@ -45,7 +45,7 @@ const currentProjects: Project[] = [
     title: "Letsellify",
     category: "E-COMMERCE",
     year: "2024",
-    image: "/projects/letsellify.jpg",
+    image: "/projects/Letsellify.jpg",
     fallbackGradient: "from-blue-600/30 via-indigo-900/20 to-transparent",
     url: "#",
     mediaType: "interface",
