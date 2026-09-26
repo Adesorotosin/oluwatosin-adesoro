@@ -25,19 +25,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html 
-      lang="en" 
+    <html
+      lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable}`}
       suppressHydrationWarning
     >
-      <body 
-        className="relative font-sans antialiased bg-white text-zinc-900 dark:bg-[#080808] dark:text-zinc-100 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300"
-        suppressHydrationWarning
-      >
+      <body className="relative min-h-screen bg-[#080808] text-zinc-100 font-sans antialiased selection:bg-white selection:text-black">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>
