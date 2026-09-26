@@ -1,34 +1,41 @@
 @import "tailwindcss";
 
-/* 1. Register the class-based dark variant for Tailwind v4 */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 2. Theme definitions */
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-  --font-heading: var(--font-bricolage), sans-serif;
+  --font-heading: var(--font-instrument-serif), Georgia, serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 }
 
-/* 3. Light Mode CSS Variables (Default) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-/* 4. Dark Mode CSS Variables (Triggered by next-themes class) */
 :root.dark,
 .dark {
   --background: #080808;
   --foreground: #ededed;
 }
 
-/* 5. Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
 }
