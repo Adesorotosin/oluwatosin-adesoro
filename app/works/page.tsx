@@ -61,9 +61,11 @@ export default function WorksPage() {
             </div>
 
             {/* Name & Bio */}
-            <h1 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 dark:text-white">
-              Oluwatosin Adesoro
-            </h1>
+            <Link href="/" className="group inline-block">
+              <h1 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 dark:text-white group-hover:opacity-70 transition-opacity">
+                Oluwatosin Adesoro
+              </h1>
+            </Link>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mt-2 mb-8">
               Product designer, design engineer &amp; coach based in Nigeria.
             </p>
@@ -197,30 +199,46 @@ export default function WorksPage() {
                   <motion.a
                     key={project.id}
                     href={project.url}
-                    target={project.url.startsWith("http") ? "_blank" : "_self"}
-                    rel="noreferrer"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.2, delay: idx * 0.03 }}
-                    whileHover={{ scale: 1.03 }}
-                    className="group relative aspect-square overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-3 shadow-sm"
+                    target={project.url.startsWith("http") ? "_blank" : undefined}
+                    rel={project.url.startsWith("http") ? "noreferrer" : undefined}
+                    initial={{ opacity: 0, y: 16, rotate: 0 }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                      rotate: [-2.2, 1.4, -1.2, 2, -1.6, 1.2, -2, 1.6, -1, 1.8, -1.4, 1][idx],
+                    }}
+                    transition={{ duration: 0.35, delay: idx * 0.03 }}
+                    whileHover={{ y: -8, rotate: 0, scale: 1.018 }}
+                    style={{ perspective: "1200px" }}
+                    className="group relative aspect-square"
                   >
-                    <div className="relative w-full h-full overflow-hidden rounded-xl">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    </div>
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-4 flex flex-col justify-end rounded-2xl">
-                      <span className="text-[10px] font-mono text-emerald-400 font-semibold tracking-wider">
-                        {project.category}
-                      </span>
-                      <h3 className="text-sm font-bold text-white tracking-tight leading-snug">
-                        {project.title}
-                      </h3>
+                    <div className="absolute inset-0 translate-x-1.5 translate-y-2 rounded-2xl border border-zinc-200/70 bg-zinc-200/60 dark:border-zinc-800 dark:bg-zinc-950" />
+                    <div className="absolute inset-0 -translate-x-1 translate-y-1 rounded-2xl border border-zinc-200/70 bg-zinc-100 dark:border-zinc-800/80 dark:bg-zinc-900" />
+                    <div className="absolute inset-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 shadow-xl shadow-black/10 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40 transition-shadow duration-300 group-hover:shadow-2xl">
+                      <div className="absolute -inset-10 bg-white/10 blur-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-white/5" />
+                      <div className="absolute inset-[7%] overflow-hidden rounded-xl border border-white/20 bg-zinc-200/40 dark:border-white/10 dark:bg-zinc-950/40">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/45 px-2.5 py-1 backdrop-blur-md">
+                        <span className="font-mono text-[8px] font-semibold tracking-[0.16em] text-white/85">
+                          {project.category}
+                        </span>
+                      </div>
+                      <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
+                        <div className="rounded-lg border border-white/15 bg-black/45 px-2.5 py-2 backdrop-blur-md">
+                          <p className="text-[11px] font-medium leading-tight text-white">{project.title}</p>
+                        </div>
+                        {project.url.startsWith("http") && (
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-md">
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </motion.a>
                 ))}
