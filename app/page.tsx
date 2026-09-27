@@ -157,6 +157,17 @@ export default function Home() {
 
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updateMobileState = () => setIsMobile(mediaQuery.matches);
+
+    updateMobileState();
+    mediaQuery.addEventListener("change", updateMobileState);
+
+    return () => mediaQuery.removeEventListener("change", updateMobileState);
+  }, []);
 
   // Avoid hydration mismatch by waiting until component mounts
   useEffect(() => {
@@ -231,13 +242,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 dark:bg-[#080808] dark:text-zinc-100 font-sans selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black antialiased transition-colors duration-300">
-      <div className="mx-auto flex max-w-6xl flex-col md:flex-row">
+      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col md:flex-row">
         
         {/* ================= LEFT SIDEBAR (FIXED / STICKY) ================= */}
-       <aside className="w-full shrink-0 p-5 sm:p-8 md:w-64 md:sticky md:top-0 md:h-screen flex flex-col justify-between overflow-y-auto">
-  <div>
+       <aside className="w-full shrink-0 border-b border-zinc-200/80 p-4 sm:p-6 md:w-64 md:border-b-0 md:sticky md:top-0 md:h-screen md:p-8 flex flex-col justify-between overflow-visible md:overflow-y-auto">
+  <div className="min-w-0">
+    <div className="flex items-center gap-3 md:block">
     {/* Profile Avatar */}
-    <div className="relative h-16 w-16 overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-700/80 mb-6 shadow-md">
+    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-700/80 shadow-md md:mb-6 md:h-16 md:w-16">
       <Image
         src="/oluwatosin.jpg"
         alt="Oluwatosin Adesoro"
@@ -247,6 +259,7 @@ export default function Home() {
       />
     </div>
 
+    <div className="min-w-0 md:contents">
     {/* Name & Bio */}
     <h1 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 dark:text-white">
       Oluwatosin Adesoro
@@ -254,9 +267,11 @@ export default function Home() {
     <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mt-2 mb-8">
       Product designer, design engineer &amp; coach based in Nigeria.
     </p>
+    </div>
+    </div>
 
     {/* Navigation Links */}
-    <nav className="flex flex-col gap-3.5 text-sm font-medium">
+    <nav className="mt-4 flex max-w-full gap-4 overflow-x-auto pb-1 text-sm font-medium scrollbar-none md:mt-0 md:flex-col md:gap-3.5 md:overflow-visible md:pb-0">
       <Link 
   href="/works" 
   className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
@@ -272,7 +287,7 @@ export default function Home() {
       <Link href="#story" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
         Story
       </Link>
-      <div className="pt-6 flex flex-col gap-3 text-xs text-zinc-400 dark:text-zinc-500">
+      <div className="hidden pt-6 flex-col gap-3 text-xs text-zinc-400 dark:text-zinc-500 md:flex">
         <Link href="#about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
           About
         </Link>
@@ -284,7 +299,7 @@ export default function Home() {
   </div>
 
   {/* Social Footer */}
-  <div className="pt-10 md:pt-0">
+  <div className="hidden pt-10 md:block md:pt-0">
     <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400 mb-2">
       <a href="https://x.com" target="_blank" rel="noreferrer" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
         <SiX className="h-4 w-4" />
@@ -301,10 +316,10 @@ export default function Home() {
 </aside>
 
         {/* ================= MAIN SCROLLABLE AREA ================= */}
-        <main className="min-w-0 flex-1 overflow-y-auto px-4 py-6 sm:px-6 sm:py-8 md:p-12">
+        <main className="min-w-0 flex-1 overflow-x-hidden px-4 py-5 sm:px-6 sm:py-8 md:p-12">
           
           {/* Top Bar */}
-          <header className="flex items-center justify-between pb-8 sm:pb-10">
+          <header className="flex items-center justify-between pb-7 sm:pb-10">
             <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
               <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
                 <SiYoutube className="h-4 w-4" />
@@ -337,7 +352,7 @@ export default function Home() {
           </header>
 
           {/* Hero Section */}
-          <section className="mb-12 max-w-2xl sm:mb-14">
+          <section className="mb-10 max-w-2xl sm:mb-14">
             <h2 className="font-heading text-3xl sm:text-4xl font-normal text-zinc-900 dark:text-white tracking-tight mb-4">
               Hi, I&apos;m Oluwatosin Adesoro.
             </h2>
@@ -347,7 +362,7 @@ export default function Home() {
           </section>
 
           {/* Current Projects Grid */}
-          <section id="works" className="mb-20 scroll-mt-8">
+          <section id="works" className="mb-16 scroll-mt-8 sm:mb-20">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-mono text-[11px] tracking-[0.2em] text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
                 CURRENT PROJECTS
@@ -357,7 +372,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-4.5">
+            <div className="grid grid-cols-1 gap-4 min-[390px]:grid-cols-2 min-[390px]:gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-4.5">
               {currentProjects.map((project, idx) => {
                 const isExternal = project.url.startsWith("http");
 
@@ -386,7 +401,7 @@ export default function Home() {
                     whileHover={{ y: -8, rotate: 0, scale: 1.018 }}
                     whileTap={{ scale: 0.98 }}
                     style={{ perspective: "1200px" }}
-                    className="group relative aspect-square min-w-0 cursor-pointer overflow-visible rounded-[1.35rem]"
+                    className="group relative aspect-[4/5] min-w-0 cursor-pointer overflow-visible rounded-[1.35rem] min-[390px]:aspect-square"
                   >
                     <motion.div
                       initial={{ rotate: cardRotations[idx] }}
@@ -495,16 +510,16 @@ export default function Home() {
           </section>
 
           {/* ================= STATS & FACTS BENTO GRID ================= */}
-          <section id="timeline" className="mb-16 scroll-mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 overflow-hidden border border-zinc-200 dark:border-zinc-800/60 rounded-xl">
+          <section id="timeline" className="mb-14 scroll-mt-8 sm:mb-16">
+            <div className="grid grid-cols-1 gap-0 md:grid-cols-3 overflow-hidden border border-zinc-200 dark:border-zinc-800/60 rounded-xl">
               
               {/* Row 1, Tile 1 */}
-              <div className="bg-[#EAEAEA] text-zinc-900 p-8 flex items-center justify-center min-h-50">
+              <div className="bg-[#EAEAEA] text-zinc-900 p-6 sm:p-8 flex items-center justify-center min-h-40 sm:min-h-50">
                 <h3 className="text-xl font-medium tracking-tight">Stats &amp; Facts</h3>
               </div>
 
               {/* Row 1, Tile 2 */}
-              <div className="bg-[#2B2B2E] text-white p-8 flex flex-col justify-center items-start min-h-50">
+              <div className="bg-[#2B2B2E] text-white p-6 sm:p-8 flex flex-col justify-center items-start min-h-40 sm:min-h-50">
                 <span className="text-5xl font-extrabold tracking-tight">4+</span>
                 <span className="font-mono text-xs tracking-widest text-zinc-400 mt-2 uppercase">
                   YEARS IN DESIGN
@@ -525,7 +540,7 @@ export default function Home() {
               </div>
 
               {/* Row 2, Tile 1 */}
-              <div className="bg-[#0A0A0A] p-8 flex flex-col justify-between min-h-55">
+              <div className="bg-[#0A0A0A] p-6 sm:p-8 flex flex-col justify-between min-h-48 sm:min-h-55">
                 <p className="text-sm text-zinc-300 leading-relaxed max-w-xs">
                   SaaS dashboards, mobile apps, e-commerce — each one designed to solve real problems.
                 </p>
@@ -540,7 +555,7 @@ export default function Home() {
               </div>
 
               {/* Row 2, Tile 2 */}
-              <div className="bg-[#0A4B82] p-4 flex items-center justify-center min-h-55 h-full relative overflow-hidden">
+              <div className="bg-[#0A4B82] p-4 flex items-center justify-center min-h-48 sm:min-h-55 h-full relative overflow-hidden">
                 <div className="relative w-full h-[180px]">
                   <Image
                     src="/projects/stats.jpg"
@@ -571,7 +586,7 @@ export default function Home() {
           </section>
 
           {/* ================= TESTIMONIALS SECTION ================= */}
-          <section id="story" className="mb-16 scroll-mt-8">
+          <section id="story" className="mb-14 scroll-mt-8 sm:mb-16">
             <div className="mb-6">
               <h3 className="text-xl font-semibold text-zinc-900 dark:text-white tracking-tight">
                 Testimonials
@@ -582,10 +597,10 @@ export default function Home() {
             </div>
 
             {/* Container */}
-            <div className="relative rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/30 p-8 sm:p-12 flex flex-col items-center justify-between min-h-105">
+            <div className="relative rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/30 p-4 sm:p-12 flex flex-col items-center justify-between min-h-[430px] sm:min-h-105">
               
               {/* Stacked Cards Wrapper */}
-              <div className="relative w-full max-w-lg my-auto pt-4 min-h-65 flex items-center justify-center">
+              <div className="relative w-full max-w-lg my-auto pt-4 min-h-[250px] sm:min-h-65 flex items-center justify-center">
                 
                 {/* Stack effect background card 2 */}
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-[88%] h-full rounded-2xl border border-zinc-200 dark:border-zinc-800/40 bg-zinc-100 dark:bg-zinc-900/40 shadow-sm pointer-events-none" />
@@ -602,16 +617,16 @@ export default function Home() {
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    className="relative z-10 w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121214] p-8 sm:p-10 shadow-2xl flex flex-col justify-between"
+                    className="relative z-10 w-full rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#121214] p-5 sm:p-10 shadow-2xl flex flex-col justify-between"
                   >
                     {/* Quote Text */}
-                    <p className="font-serif text-center text-zinc-700 dark:text-zinc-200 text-lg sm:text-xl leading-relaxed italic mb-8">
+                    <p className="font-serif text-center text-zinc-700 dark:text-zinc-200 text-base sm:text-xl leading-7 sm:leading-relaxed italic mb-6 sm:mb-8">
                       &ldquo;{activeTestimonial.quote}&rdquo;
                     </p>
 
                     {/* Card Footer */}
                     <div className="flex items-center justify-between pt-4 border-t border-zinc-200 dark:border-zinc-800/60">
-                      <div className="flex items-center gap-3">
+                      <div className="flex min-w-0 items-center gap-3">
                         <div className="relative h-10 w-10 rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800">
                           <Image
                             src={activeTestimonial.avatar}
@@ -621,17 +636,17 @@ export default function Home() {
                           />
                         </div>
                         <div>
-                          <h4 className="text-sm font-semibold text-zinc-900 dark:text-white leading-snug">
+                          <h4 className="max-w-[150px] truncate text-xs font-semibold text-zinc-900 dark:text-white leading-snug sm:max-w-none sm:text-sm">
                             {activeTestimonial.author}
                           </h4>
-                          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                          <p className="max-w-[150px] truncate text-[10px] text-zinc-500 dark:text-zinc-400 sm:max-w-none sm:text-xs">
                             {activeTestimonial.role}
                           </p>
                         </div>
                       </div>
 
                       {/* Badge */}
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                      <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                         🌱 {activeTestimonial.tag}
                       </span>
                     </div>
@@ -682,7 +697,7 @@ export default function Home() {
           </section>
 
           {/* ================= PLAYGROUND ================= */}
-          <section id="playground" className="mb-20 scroll-mt-8">
+          <section id="playground" className="mb-16 scroll-mt-8 sm:mb-20">
             <div className="mb-6">
               <p className="font-mono text-[11px] tracking-[0.2em] text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
                 PLAYGROUND
@@ -719,7 +734,7 @@ export default function Home() {
           </section>
 
           {/* ================= ABOUT ================= */}
-          <section id="about" className="mb-20 scroll-mt-8">
+          <section id="about" className="mb-16 scroll-mt-8 sm:mb-20">
             <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 sm:p-10 dark:border-zinc-800 dark:bg-zinc-900/40">
               <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start">
                 <div>
@@ -762,7 +777,7 @@ export default function Home() {
           </section>
 
           {/* NEW FOOTER Section */}
-          <footer className="mt-24 pt-14 pb-8 sm:mt-32 sm:pt-20 border-t border-zinc-200 dark:border-neutral-800/60 relative overflow-hidden">
+          <footer className="mt-20 pt-12 pb-8 sm:mt-32 sm:pt-20 border-t border-zinc-200 dark:border-neutral-800/60 relative overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-zinc-600 dark:text-neutral-400 text-sm leading-relaxed max-w-4xl relative z-10">
               <div className="space-y-4 font-light">
                 <p>
