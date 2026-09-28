@@ -21,7 +21,8 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: "Oluwatosin Adesoro | Product Designer & Design Engineer",
-  description: "Portfolio of Oluwatosin Adesoro - Product Designer & Design Engineer",
+  description:
+    "Portfolio of Oluwatosin Adesoro - Product Designer & Design Engineer",
 };
 
 export default function RootLayout({
@@ -36,7 +37,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="relative min-h-screen bg-[#080808] text-zinc-100 font-sans antialiased selection:bg-white selection:text-black">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
