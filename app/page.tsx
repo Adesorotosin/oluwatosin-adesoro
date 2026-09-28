@@ -253,7 +253,7 @@ export default function Home() {
       <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col md:flex-row">
         {/* ================= LEFT SIDEBAR ================= */}
 
-        <aside className="w-full shrink-0 p-4 sm:p-6 md:sticky md:top-0 md:h-screen md:w-64 md:p-8">
+        <aside className="w-full shrink-0 p-4 sm:p-6 md:fixed md:left-0 md:top-0 md:h-screen md:w-64 md:p-8">
           <div className="flex h-full flex-col justify-between overflow-visible md:overflow-y-auto">
             <div className="min-w-0">
               <div className="flex items-center gap-3 md:block">
@@ -283,7 +283,7 @@ export default function Home() {
               {/* Navigation */}
               <nav className="mt-4 flex max-w-full gap-4 overflow-x-auto pb-1 text-sm font-medium scrollbar-none md:mt-0 md:flex-col md:gap-3.5 md:overflow-visible md:pb-0">
                 <Link
-                  href="/works"
+                  href="#works"
                   className="text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                 >
                   Works
@@ -370,7 +370,7 @@ export default function Home() {
 
         {/* ================= MAIN CONTENT ================= */}
 
-        <main className="min-w-0 flex-1 overflow-x-hidden px-4 py-5 sm:px-6 sm:py-8 md:p-12">
+        <main className="min-w-0 flex-1 overflow-x-hidden px-4 py-5 sm:px-6 sm:py-8 md:ml-64 md:p-12">
           {/* Top Bar */}
           <header className="flex items-center justify-between pb-7 sm:pb-10">
             <div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-400">
@@ -473,13 +473,10 @@ export default function Home() {
 
                 const mediaFrameClass = {
                   photo: "bg-zinc-100 dark:bg-zinc-900",
-                  interface:
-                    "bg-zinc-100/80 dark:bg-zinc-950/60",
+                  interface: "bg-zinc-100/80 dark:bg-zinc-950/60",
                   transparent: "bg-transparent",
-                  mobile:
-                    "bg-zinc-100/70 dark:bg-zinc-950/50",
-                  poster:
-                    "bg-zinc-100 dark:bg-zinc-950/40",
+                  mobile: "bg-zinc-100/70 dark:bg-zinc-950/50",
+                  poster: "bg-zinc-100 dark:bg-zinc-950/40",
                 }[project.mediaType];
 
                 const mediaFitClass =
@@ -492,11 +489,7 @@ export default function Home() {
                     key={project.id}
                     href={project.url}
                     target={isExternal ? "_blank" : undefined}
-                    rel={
-                      isExternal
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
+                    rel={isExternal ? "noopener noreferrer" : undefined}
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
@@ -693,7 +686,7 @@ export default function Home() {
 
                 <div className="mt-6">
                   <a
-                    href="mailto:contact@example.com"
+                    href="mailto:oluwatosinadesoro96@gmail.com"
                     className="inline-block bg-[#00C82C] px-5 py-2.5 text-xs font-semibold text-black transition-colors hover:bg-[#00e833]"
                   >
                     Contact me
@@ -701,7 +694,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative flex min-h-48 h-full items-center justify-center overflow-hidden bg-[#0A4B82] p-4 sm:min-h-55">
+              <div className="relative flex h-full min-h-48 items-center justify-center overflow-hidden bg-[#0A4B82] p-4 sm:min-h-55">
                 <div className="relative h-[180px] w-full">
                   <Image
                     src="/projects/stats.jpg"
@@ -756,10 +749,7 @@ export default function Home() {
 
                 <div className="pointer-events-none absolute -top-1.5 left-1/2 h-full w-[94%] -translate-x-1/2 rounded-2xl border border-zinc-200 bg-zinc-100 shadow-md dark:border-zinc-800/60 dark:bg-zinc-900/70" />
 
-                <AnimatePresence
-                  mode="wait"
-                  custom={direction}
-                >
+                <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={activeTestimonial.id}
                     custom={direction}
