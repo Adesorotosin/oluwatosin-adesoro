@@ -283,7 +283,7 @@ export default function Home() {
               {/* Navigation */}
               <nav className="mt-4 flex max-w-full gap-4 overflow-x-auto pb-1 text-sm font-medium scrollbar-none md:mt-0 md:flex-col md:gap-3.5 md:overflow-visible md:pb-0">
                 <Link
-                  href="#works"
+                  href="/works"
                   className="text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                 >
                   Works
@@ -459,13 +459,34 @@ export default function Home() {
               </h3>
 
               <Link
-                href="#works"
+                href="/works"
                 className="flex items-center gap-1 text-xs font-medium text-indigo-600 transition-colors hover:underline dark:text-indigo-400"
               >
                 All Works
                 <span className="text-[10px]">▸</span>
               </Link>
             </div>
+
+            <Link
+              href="/projects/logistics-operations"
+              className="group mb-6 flex flex-col gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition-colors hover:border-indigo-400 dark:border-zinc-800 dark:bg-zinc-950/70 dark:hover:border-indigo-500 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-indigo-600 dark:text-indigo-400">
+                  Featured case study · Discovery in progress
+                </p>
+                <h4 className="text-lg font-medium text-zinc-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
+                  Bringing structure to a manual logistics operation
+                </h4>
+                <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                  Exploring inventory visibility, order tracking, dispatch coordination,
+                  and payment reconciliation.
+                </p>
+              </div>
+              <span className="inline-flex shrink-0 items-center gap-2 text-sm font-medium">
+                Read case study <ArrowUpRight className="h-4 w-4" />
+              </span>
+            </Link>
 
             <div className="grid grid-cols-1 gap-4 min-[390px]:grid-cols-2 min-[390px]:gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-4.5">
               {currentProjects.map((project, idx) => {

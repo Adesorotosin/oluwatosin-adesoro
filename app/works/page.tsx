@@ -160,6 +160,33 @@ export default function WorksPage() {
             </p>
           </section>
 
+          {/* Featured case study */}
+          <Link
+            href="/projects/logistics-operations"
+            className="group mb-8 flex flex-col gap-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-950/70 dark:hover:border-zinc-600 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+          >
+            <div className="min-w-0">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">
+                  Case study
+                </span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-500">
+                  Discovery in progress
+                </span>
+              </div>
+              <h2 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 transition-colors group-hover:text-indigo-700 dark:text-white dark:group-hover:text-indigo-300 sm:text-3xl">
+                Bringing structure to a manual logistics operation
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                An exploratory product-design case study on inventory, order traceability, dispatch, and payment reconciliation.
+              </p>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-zinc-900 dark:text-white">
+              Read case study
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </span>
+          </Link>
+
           {/* Pill Tabs: Projects / Clients */}
           <div className="flex items-center gap-2 mb-8">
             <button
