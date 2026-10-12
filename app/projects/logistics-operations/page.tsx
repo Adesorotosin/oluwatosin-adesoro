@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   Boxes,
   CheckCircle2,
+  Circle,
   CircleHelp,
   ClipboardList,
   LockKeyhole,
