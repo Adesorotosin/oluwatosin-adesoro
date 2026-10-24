@@ -57,7 +57,7 @@ const currentProjects: Project[] = [
     image: "/projects/Letsellify.jpg",
     fallbackGradient:
       "from-blue-600/30 via-indigo-900/20 to-transparent",
-    url: "#",
+    url: "/projects/letsellify",
     mediaType: "interface",
     mediaScale: "scale-[0.86]",
   },
@@ -460,7 +460,7 @@ export default function Home() {
 
               <Link
                 href="/works"
-                className="flex items-center gap-1 text-xs font-medium text-indigo-600 transition-colors hover:underline dark:text-indigo-400"
+                className="flex items-center gap-1 text-xs font-medium text-[#7655FB] transition-colors hover:underline dark:text-[#A895FF]"
               >
                 All Works
                 <span className="text-[10px]">▸</span>
@@ -472,7 +472,7 @@ export default function Home() {
               className="group mb-6 flex flex-col gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition-colors hover:border-indigo-400 dark:border-zinc-800 dark:bg-zinc-950/70 dark:hover:border-indigo-500 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-indigo-600 dark:text-indigo-400">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#7655FB] dark:text-[#A895FF]">
                   Featured case study · Discovery in progress
                 </p>
                 <h4 className="text-lg font-medium text-zinc-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-400">
@@ -708,7 +708,7 @@ export default function Home() {
                 <div className="mt-6">
                   <a
                     href="mailto:oluwatosinadesoro96@gmail.com"
-                    className="inline-block bg-[#00C82C] px-5 py-2.5 text-xs font-semibold text-black transition-colors hover:bg-[#00e833]"
+                    className="inline-flex items-center rounded-full bg-[#7655FB] px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-[#6544E8]"
                   >
                     Contact me
                   </a>
@@ -997,6 +997,29 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ================= PROJECT ENQUIRY ================= */}
+          <section id="contact" className="mb-16 scroll-mt-8 sm:mb-20">
+            <div className="overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <div className="grid gap-8 p-6 sm:p-9 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12 lg:p-12">
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#7655FB]">LET’S WORK TOGETHER</p>
+                  <h3 className="mt-3 font-heading text-3xl leading-tight sm:text-4xl">Have a product challenge in mind?</h3>
+                  <p className="mt-4 max-w-sm text-sm leading-6 text-zinc-600 dark:text-zinc-400">Tell me a little about what you’re building. Share a preferred date for a first conversation and I’ll follow up to confirm.</p>
+                  <a href="https://cal.com/" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#7655FB] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#6544E8]">Explore a calendar <ArrowUpRight className="h-4 w-4" /></a>
+                  <p className="mt-2 text-xs text-zinc-500">Calendar link opens a scheduling service; no booking is made on this page.</p>
+                </div>
+                <form action="mailto:oluwatosinadesoro96@gmail.com" method="get" className="grid gap-4 sm:grid-cols-2">
+                  <label className="grid gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-300">Your name<input required name="name" placeholder="Full name" className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-[#7655FB] dark:border-zinc-700 dark:bg-zinc-950 dark:text-white" /></label>
+                  <label className="grid gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-300">Email address<input required type="email" name="email" placeholder="you@company.com" className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none transition focus:border-[#7655FB] dark:border-zinc-700 dark:bg-zinc-950 dark:text-white" /></label>
+                  <label className="grid gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-300">Service needed<select name="service" className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none focus:border-[#7655FB] dark:border-zinc-700 dark:bg-zinc-950 dark:text-white"><option>Product / UX design</option><option>Website design & development</option><option>Design systems</option><option>Product consultation</option><option>Coaching / mentoring</option></select></label>
+                  <label className="grid gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-300">Preferred date<input type="date" name="preferred-date" min={new Date().toISOString().slice(0,10)} className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none focus:border-[#7655FB] dark:border-zinc-700 dark:bg-zinc-950 dark:text-white" /></label>
+                  <label className="grid gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-300 sm:col-span-2">Project details<textarea required name="details" rows={4} placeholder="What are you trying to solve or build?" className="w-full resize-y rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 outline-none focus:border-[#7655FB] dark:border-zinc-700 dark:bg-zinc-950 dark:text-white" /></label>
+                  <div className="sm:col-span-2"><button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#7655FB] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#6544E8]">Send project enquiry <ArrowUpRight className="h-4 w-4" /></button><p className="mt-2 text-xs text-zinc-500">This opens your email app with the enquiry details. Nothing is stored on this website.</p></div>
+                </form>
               </div>
             </div>
           </section>
