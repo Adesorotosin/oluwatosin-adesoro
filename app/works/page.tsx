@@ -76,7 +76,7 @@ export default function WorksPage() {
                 href="/works"
                 className={
                   pathname === "/works"
-                    ? "text-zinc-900 dark:text-white font-semibold underline decoration-[#7655FB] underline-offset-4"
+                    ? "text-zinc-900 dark:text-white font-semibold underline decoration-[#16BA16] underline-offset-4"
                     : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                 }
               >
@@ -167,14 +167,14 @@ export default function WorksPage() {
           >
             <div className="min-w-0">
               <div className="mb-3 flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-[#7655FB]/30 bg-[#7655FB]/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-[#7655FB] dark:text-[#B8A8FF]">
+                <span className="rounded-full border border-[#16BA16]/30 bg-[#16BA16]/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-[#16BA16] dark:text-[#16BA16]">
                   Case study
                 </span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-500">
                   Discovery in progress
                 </span>
               </div>
-              <h2 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 transition-colors group-hover:text-[#7655FB] dark:text-white dark:group-hover:text-[#B8A8FF] sm:text-3xl">
+              <h2 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 transition-colors group-hover:text-[#16BA16] dark:text-white dark:group-hover:text-[#16BA16] sm:text-3xl">
                 Bringing structure to a manual logistics operation
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
@@ -193,7 +193,7 @@ export default function WorksPage() {
               onClick={() => setActiveTab("projects")}
               className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${
                 activeTab === "projects"
-                  ? "bg-[#7655FB] text-white shadow-sm"
+                  ? "bg-[#16BA16] text-zinc-950 shadow-sm"
                   : "bg-zinc-100 text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
@@ -203,7 +203,7 @@ export default function WorksPage() {
               onClick={() => setActiveTab("clients")}
               className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${
                 activeTab === "clients"
-                  ? "bg-[#7655FB] text-white shadow-sm"
+                  ? "bg-[#16BA16] text-zinc-950 shadow-sm"
                   : "bg-zinc-100 text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
