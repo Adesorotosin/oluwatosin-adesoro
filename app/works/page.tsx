@@ -92,10 +92,10 @@ export default function WorksPage() {
                 Story
               </Link>
               <div className="pt-6 flex flex-col gap-3 text-xs text-zinc-400 dark:text-zinc-500">
-                <Link href="#about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
                   About
                 </Link>
-                <Link href="/resume.pdf" target="_blank" className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1">
+                <Link href="/resume" target="_blank" className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1">
                   Resume <ArrowUpRight className="h-3 w-3" />
                 </Link>
               </div>
