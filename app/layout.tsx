@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   title: "Oluwatosin Adesoro | Product Designer & Design Engineer",
   description:
     "Portfolio of Oluwatosin Adesoro - Product Designer & Design Engineer",
+  icons: { icon: "/avatar-favicon.svg", shortcut: "/avatar-favicon.svg" },
 };
 
 export default function RootLayout({
