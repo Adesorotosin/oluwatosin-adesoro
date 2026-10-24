@@ -243,12 +243,12 @@ export default function WorksPage() {
                     <div className="absolute inset-0 -translate-x-1 translate-y-1 rounded-2xl border border-zinc-200/70 bg-zinc-100 dark:border-zinc-800/80 dark:bg-zinc-900" />
                     <div className="absolute inset-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 shadow-xl shadow-black/10 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40 transition-shadow duration-300 group-hover:shadow-2xl">
                       <div className="absolute -inset-10 bg-white/10 blur-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-white/5" />
-                      <div className="absolute inset-x-[7%] inset-y-[14%] overflow-hidden rounded-xl border border-white/20 bg-zinc-200/40 dark:border-white/10 dark:bg-zinc-950/40">
+                      <div className="absolute inset-x-[7%] inset-y-[18%] overflow-hidden rounded-xl border border-white/20 bg-zinc-200/40 dark:border-white/10 dark:bg-zinc-950/40">
                         <Image
                           src={project.image}
                           alt={project.title}
                           fill
-                          className={project.title === "Letsellify" || project.title === "ContriHub" || project.title === "Awa-yoruba" ? "object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]" : "object-cover transition-transform duration-500 group-hover:scale-105"}
+                          className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>
                       <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/45 px-2.5 py-1 backdrop-blur-md">
