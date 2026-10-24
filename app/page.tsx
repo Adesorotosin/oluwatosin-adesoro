@@ -44,7 +44,7 @@ const currentProjects: Project[] = [
     year: "2026",
     image: "/projects/Goalhyke.jpg",
     fallbackGradient:
-      "from-emerald-500/20 via-teal-900/30 to-transparent",
+      "from-[#7655FB]/20 via-teal-900/30 to-transparent",
     url: "https://goalhyke.com",
     mediaType: "interface",
     mediaScale: "scale-[0.86]",
@@ -104,7 +104,7 @@ const currentProjects: Project[] = [
     year: "2026",
     image: "/projects/sparkle-eye.jpg",
     fallbackGradient:
-      "from-indigo-500/20 via-blue-900/20 to-transparent",
+      "from-[#7655FB]/20 via-blue-900/20 to-transparent",
     url: "#",
     mediaType: "interface",
     mediaScale: "scale-[0.82]",
@@ -469,7 +469,7 @@ export default function Home() {
 
             <Link
               href="/projects/logistics-operations"
-              className="group mb-6 flex flex-col gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition-colors hover:border-indigo-400 dark:border-zinc-800 dark:bg-zinc-950/70 dark:hover:border-indigo-500 sm:flex-row sm:items-center sm:justify-between"
+              className="group mb-6 flex flex-col gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 transition-colors hover:border-indigo-400 dark:border-zinc-800 dark:bg-zinc-950/70 dark:hover:border-[#7655FB] sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
                 <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#7655FB] dark:text-[#A895FF]">
@@ -614,7 +614,7 @@ export default function Home() {
 
                           <div className="mt-0.5 flex items-end justify-between gap-1.5">
                             <div className="min-w-0">
-                              <span className="block font-mono text-[8px] font-medium tracking-wider text-emerald-400 sm:text-[9px]">
+                              <span className="block font-mono text-[8px] font-medium tracking-wider text-[#7655FB] sm:text-[9px]">
                                 {project.year}
                               </span>
 
@@ -647,7 +647,7 @@ export default function Home() {
                           </div>
 
                           <div>
-                            <span className="block font-mono text-[10px] font-medium tracking-wider text-emerald-400">
+                            <span className="block font-mono text-[10px] font-medium tracking-wider text-[#7655FB]">
                               {project.year}
                             </span>
 
@@ -806,7 +806,7 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <span className="hidden items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400 sm:inline-flex">
+                      <span className="hidden items-center gap-1 rounded-full border border-[#7655FB]/20 bg-[#7655FB]/10 px-2.5 py-1 text-[11px] font-medium text-[#7655FB] dark:text-[#7655FB] sm:inline-flex">
                         🌱 {activeTestimonial.tag}
                       </span>
                     </div>
@@ -833,7 +833,7 @@ export default function Home() {
                       key={idx}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         idx === currentTestimonialIdx
-                          ? "w-5 bg-emerald-500"
+                          ? "w-5 bg-[#7655FB]"
                           : "w-1.5 bg-zinc-300 dark:bg-zinc-700"
                       }`}
                     />
