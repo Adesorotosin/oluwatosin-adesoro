@@ -12,7 +12,7 @@ import { useTheme } from "next-themes";
 
 const projectsData = [
   { id: 1, title: "GoalHyke", category: "AI PRODUCT", image: "/projects/Goalhyke.jpg", url: "https://goalhyke.com" },
-  { id: 2, title: "Letsellify", category: "E-COMMERCE", image: "/projects/letsellify.jpg", url: "https://letsellify.com" },
+  { id: 2, title: "Letsellify", category: "E-COMMERCE", image: "/projects/Letsellify.jpg", url: "/projects/letsellify", internal: true },
   { id: 3, title: "ContriHub", category: "FINTECH", image: "/projects/contrihub-3d-graphic.png", url: "https://contrihub.com" },
   { id: 4, title: "Habtech", category: "CONSTRUCTION", image: "/projects/Habtech.jpg", url: "https://habtech.com" },
   { id: 5, title: "Bida Forum", category: "WEB NGO", image: "/projects/Bida Forum.jpg", url: "https://bidaforum.org" },
@@ -76,7 +76,7 @@ export default function WorksPage() {
                 href="/works"
                 className={
                   pathname === "/works"
-                    ? "text-zinc-900 dark:text-white font-semibold underline decoration-pink-500 underline-offset-4"
+                    ? "text-zinc-900 dark:text-white font-semibold underline decoration-[#16BA16] underline-offset-4"
                     : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
                 }
               >
@@ -92,10 +92,10 @@ export default function WorksPage() {
                 Story
               </Link>
               <div className="pt-6 flex flex-col gap-3 text-xs text-zinc-400 dark:text-zinc-500">
-                <Link href="#about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
                   About
                 </Link>
-                <Link href="/resume.pdf" target="_blank" className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1">
+                <Link href="/resume" target="_blank" className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1">
                   Resume <ArrowUpRight className="h-3 w-3" />
                 </Link>
               </div>
@@ -167,14 +167,14 @@ export default function WorksPage() {
           >
             <div className="min-w-0">
               <div className="mb-3 flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">
+                <span className="rounded-full border border-[#16BA16]/30 bg-[#16BA16]/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-[#16BA16] dark:text-[#16BA16]">
                   Case study
                 </span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-500">
                   Discovery in progress
                 </span>
               </div>
-              <h2 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 transition-colors group-hover:text-indigo-700 dark:text-white dark:group-hover:text-indigo-300 sm:text-3xl">
+              <h2 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 transition-colors group-hover:text-[#16BA16] dark:text-white dark:group-hover:text-[#16BA16] sm:text-3xl">
                 Bringing structure to a manual logistics operation
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
@@ -193,7 +193,7 @@ export default function WorksPage() {
               onClick={() => setActiveTab("projects")}
               className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${
                 activeTab === "projects"
-                  ? "bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm"
+                  ? "bg-[#16BA16] text-zinc-950 shadow-sm"
                   : "bg-zinc-100 text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
@@ -203,7 +203,7 @@ export default function WorksPage() {
               onClick={() => setActiveTab("clients")}
               className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${
                 activeTab === "clients"
-                  ? "bg-zinc-900 text-white dark:bg-white dark:text-black shadow-sm"
+                  ? "bg-[#16BA16] text-zinc-950 shadow-sm"
                   : "bg-zinc-100 text-zinc-600 dark:bg-zinc-900 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
             >
@@ -243,12 +243,12 @@ export default function WorksPage() {
                     <div className="absolute inset-0 -translate-x-1 translate-y-1 rounded-2xl border border-zinc-200/70 bg-zinc-100 dark:border-zinc-800/80 dark:bg-zinc-900" />
                     <div className="absolute inset-0 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 shadow-xl shadow-black/10 dark:border-zinc-700/80 dark:bg-zinc-900 dark:shadow-black/40 transition-shadow duration-300 group-hover:shadow-2xl">
                       <div className="absolute -inset-10 bg-white/10 blur-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:bg-white/5" />
-                      <div className="absolute inset-[7%] overflow-hidden rounded-xl border border-white/20 bg-zinc-200/40 dark:border-white/10 dark:bg-zinc-950/40">
+                      <div className="absolute inset-x-[7%] inset-y-[18%] overflow-hidden rounded-xl border border-white/20 bg-zinc-200/40 dark:border-white/10 dark:bg-zinc-950/40">
                         <Image
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]"
                         />
                       </div>
                       <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/45 px-2.5 py-1 backdrop-blur-md">
