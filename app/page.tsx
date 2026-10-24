@@ -312,14 +312,14 @@ export default function Home() {
 
                 <div className="hidden flex-col gap-3 pt-6 text-xs text-zinc-400 dark:text-zinc-500 md:flex">
                   <Link
-                    href="#about"
+                    href="/about"
                     className="transition-colors hover:text-zinc-900 dark:hover:text-white"
                   >
                     About
                   </Link>
 
                   <Link
-                    href="/resume.pdf"
+                    href="/resume"
                     target="_blank"
                     className="flex items-center gap-1 transition-colors hover:text-zinc-900 dark:hover:text-white"
                   >
