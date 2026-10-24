@@ -167,14 +167,14 @@ export default function WorksPage() {
           >
             <div className="min-w-0">
               <div className="mb-3 flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">
+                <span className="rounded-full border border-[#7655FB]/30 bg-[#7655FB]/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-[#7655FB] dark:text-[#B8A8FF]">
                   Case study
                 </span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-500">
                   Discovery in progress
                 </span>
               </div>
-              <h2 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 transition-colors group-hover:text-indigo-700 dark:text-white dark:group-hover:text-indigo-300 sm:text-3xl">
+              <h2 className="font-heading text-2xl font-normal tracking-tight text-zinc-900 transition-colors group-hover:text-[#7655FB] dark:text-white dark:group-hover:text-[#B8A8FF] sm:text-3xl">
                 Bringing structure to a manual logistics operation
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
