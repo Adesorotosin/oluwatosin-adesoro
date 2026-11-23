@@ -2,45 +2,63 @@
 
 import type { CSSProperties } from "react";
 
-// Fixed, deterministic positions keep the particle field stable between renders.
-const flakes = Array.from({ length: 88 }, (_, index) => {
-  const seed = index + 1;
-  const layer = seed % 5 === 0 ? "near" : seed % 3 === 0 ? "mid" : "far";
+const bulbColors = ["#ffd98a", "#fff1c2", "#e88b78", "#f6c66f", "#d9e8c5", "#fff0bd"];
 
-  return {
-    id: index,
-    left: (seed * 47.731) % 100,
-    delay: -((seed * 2.137) % 26),
-    duration: 19 + ((seed * 7) % 19),
-    size: layer === "near" ? 3.5 + ((seed * 13) % 2) : layer === "mid" ? 2 + ((seed * 11) % 2) : 1 + ((seed * 17) % 2),
-    drift: ((seed * 29) % 90) - 45,
-    opacity: layer === "near" ? 0.72 : layer === "mid" ? 0.52 : 0.34 + ((seed * 7) % 20) / 100,
-    blur: layer === "near" ? 0 : layer === "mid" ? 0.25 : 0.55,
-    layer,
-  };
-});
+const bulbs = Array.from({ length: 17 }, (_, index) => ({
+  id: index,
+  left: (index / 16) * 100,
+  top: 9 + Math.sin((index / 16) * Math.PI * 2) * 7,
+  delay: -((index * 0.71) % 3.8),
+  color: bulbColors[index % bulbColors.length],
+}));
 
-export function Snowfall() {
+const sparkles = Array.from({ length: 30 }, (_, index) => ({
+  id: index,
+  left: (index * 61.73 + 7) % 100,
+  top: (index * 37.19 + 13) % 100,
+  delay: -((index * 1.17) % 5),
+  duration: 3.2 + ((index * 7) % 30) / 10,
+  size: 2 + ((index * 11) % 3),
+}));
+
+export function ChristmasDecor() {
   return (
-    <div className="snowfall" aria-hidden="true">
-      {flakes.map((flake) => (
-        <span
-          key={flake.id}
-          className={`snowfall__flake snowfall__flake--${flake.layer}`}
-          style={
-            {
-              left: `${flake.left}%`,
-              animationDelay: `${flake.delay}s`,
-              animationDuration: `${flake.duration}s`,
-              width: `${flake.size}px`,
-              height: `${flake.size}px`,
-              opacity: flake.opacity,
-              filter: `blur(${flake.blur}px)`,
-              "--snow-drift": `${flake.drift}px`,
-            } as CSSProperties
-          }
-        />
-      ))}
+    <div className="christmas-decor" aria-hidden="true">
+      <div className="christmas-garland">
+        <span className="christmas-garland__wire" />
+        {bulbs.map((bulb) => (
+          <span
+            key={bulb.id}
+            className="christmas-bulb"
+            style={
+              {
+                left: `${bulb.left}%`,
+                top: `${bulb.top}px`,
+                animationDelay: `${bulb.delay}s`,
+                "--bulb-color": bulb.color,
+              } as CSSProperties
+            }
+          />
+        ))}
+      </div>
+      <div className="christmas-sparkles">
+        {sparkles.map((sparkle) => (
+          <span
+            key={sparkle.id}
+            className="christmas-sparkle"
+            style={
+              {
+                left: `${sparkle.left}%`,
+                top: `${sparkle.top}%`,
+                width: `${sparkle.size}px`,
+                height: `${sparkle.size}px`,
+                animationDelay: `${sparkle.delay}s`,
+                animationDuration: `${sparkle.duration}s`,
+              } as CSSProperties
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 }
