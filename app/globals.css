@@ -47,9 +47,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Layered ambient snowfall inspired by the reference: quiet, scattered points
-   with depth, slow drift and no impact on page interaction. */
-.snowfall {
+/* Warm seasonal lights and restrained gold sparkles. Decorative only. */
+.christmas-decor {
   position: fixed;
   inset: 0;
   z-index: 50;
@@ -58,39 +57,75 @@ body {
   contain: strict;
 }
 
-.snowfall__flake {
+.christmas-garland {
   position: absolute;
-  top: -10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 34px;
+}
+
+.christmas-garland__wire {
+  position: absolute;
+  top: -17px;
+  left: -3%;
+  width: 106%;
+  height: 34px;
+  border-bottom: 1px solid rgba(210, 190, 150, 0.38);
+  border-radius: 0 0 50% 50%;
+  transform: rotate(0.4deg);
+}
+
+.christmas-bulb {
+  position: absolute;
+  width: 7px;
+  height: 10px;
+  border-radius: 45% 45% 50% 50%;
+  background: var(--bulb-color);
+  box-shadow: 0 0 5px 1px color-mix(in srgb, var(--bulb-color) 65%, transparent),
+    0 0 13px 3px color-mix(in srgb, var(--bulb-color) 30%, transparent);
+  transform: translateX(-50%);
+  animation: christmas-glow 2.8s ease-in-out infinite alternate;
+}
+
+.christmas-bulb::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 4px;
+  top: -3px;
+  left: 2px;
+  border-radius: 2px 2px 0 0;
+  background: rgba(190, 175, 145, 0.65);
+}
+
+.christmas-sparkles {
+  position: absolute;
+  inset: 0;
+}
+
+.christmas-sparkle {
+  position: absolute;
   display: block;
   border-radius: 50%;
-  background: #c8d9e5;
-  will-change: transform;
-  animation: snowfall-drift linear infinite;
+  background: #f6d99a;
+  box-shadow: 0 0 6px 1px rgba(246, 217, 154, 0.35);
+  opacity: 0;
+  animation: christmas-twinkle ease-in-out infinite;
 }
 
-.snowfall__flake--near {
-  box-shadow: 0 0 5px rgba(200, 220, 235, 0.18);
+@keyframes christmas-glow {
+  from { opacity: 0.58; filter: brightness(0.88); }
+  to { opacity: 1; filter: brightness(1.18); }
 }
 
-.snowfall__flake--mid {
-  background: #b9cad7;
-}
-
-.snowfall__flake--far {
-  background: #aabac8;
-}
-
-@keyframes snowfall-drift {
-  from {
-    transform: translate3d(0, -2vh, 0);
-  }
-  to {
-    transform: translate3d(var(--snow-drift), 112vh, 0);
-  }
+@keyframes christmas-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.55); }
+  45%, 60% { opacity: 0.72; transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .snowfall {
+  .christmas-decor {
     display: none;
   }
 }
@@ -98,6 +133,19 @@ body {
 @media (max-width: 767px) {
   body {
     -webkit-text-size-adjust: 100%;
+  }
+
+  .christmas-garland {
+    height: 27px;
+  }
+
+  .christmas-bulb {
+    width: 5px;
+    height: 8px;
+  }
+
+  .christmas-sparkle:nth-child(n + 19) {
+    display: none;
   }
 
   .scrollbar-none {
