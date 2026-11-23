@@ -47,7 +47,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle ambient snowfall: decorative, non-interactive and motion-sensitive. */
+/* Layered ambient snowfall inspired by the reference: quiet, scattered points
+   with depth, slow drift and no impact on page interaction. */
 .snowfall {
   position: fixed;
   inset: 0;
@@ -59,26 +60,32 @@ body {
 
 .snowfall__flake {
   position: absolute;
-  top: -12px;
+  top: -10px;
   display: block;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 0 7px rgba(220, 238, 255, 0.35);
+  border-radius: 50%;
+  background: #c8d9e5;
   will-change: transform;
-  animation-name: snowfall-drift;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+  animation: snowfall-drift linear infinite;
+}
+
+.snowfall__flake--near {
+  box-shadow: 0 0 5px rgba(200, 220, 235, 0.18);
+}
+
+.snowfall__flake--mid {
+  background: #b9cad7;
+}
+
+.snowfall__flake--far {
+  background: #aabac8;
 }
 
 @keyframes snowfall-drift {
-  0% {
-    transform: translate3d(0, -12px, 0);
+  from {
+    transform: translate3d(0, -2vh, 0);
   }
-  50% {
-    transform: translate3d(var(--snow-drift), 52vh, 0);
-  }
-  100% {
-    transform: translate3d(0, 105vh, 0);
+  to {
+    transform: translate3d(var(--snow-drift), 112vh, 0);
   }
 }
 
