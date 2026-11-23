@@ -40,12 +40,59 @@ img {
   max-width: 100%;
 }
 
-
 html,
 body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+/* Layered ambient snowfall inspired by the reference: quiet, scattered points
+   with depth, slow drift and no impact on page interaction. */
+.snowfall {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.snowfall__flake {
+  position: absolute;
+  top: -10px;
+  display: block;
+  border-radius: 50%;
+  background: #c8d9e5;
+  will-change: transform;
+  animation: snowfall-drift linear infinite;
+}
+
+.snowfall__flake--near {
+  box-shadow: 0 0 5px rgba(200, 220, 235, 0.18);
+}
+
+.snowfall__flake--mid {
+  background: #b9cad7;
+}
+
+.snowfall__flake--far {
+  background: #aabac8;
+}
+
+@keyframes snowfall-drift {
+  from {
+    transform: translate3d(0, -2vh, 0);
+  }
+  to {
+    transform: translate3d(var(--snow-drift), 112vh, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snowfall {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
