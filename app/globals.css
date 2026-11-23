@@ -114,6 +114,51 @@ body {
   animation: christmas-twinkle ease-in-out infinite;
 }
 
+.christmas-embers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.christmas-ember {
+  position: absolute;
+  top: -18px;
+  display: block;
+  border-radius: 50%;
+  background: #ffb45e;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: ember-fall linear infinite;
+}
+
+.christmas-ember::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 18px;
+  left: 50%;
+  bottom: 2px;
+  transform: translateX(-50%);
+  border-radius: 100%;
+  background: linear-gradient(to top, transparent, rgba(255, 133, 54, 0.7));
+  filter: blur(1px);
+}
+
+.christmas-ember--soft {
+  box-shadow: 0 0 6px 2px rgba(255, 151, 66, 0.38);
+}
+
+.christmas-ember--bright {
+  background: #ffd08a;
+  box-shadow: 0 0 9px 3px rgba(255, 142, 57, 0.65),
+    0 0 18px 5px rgba(255, 105, 35, 0.2);
+}
+
+.christmas-ember--bright::after {
+  height: 25px;
+  background: linear-gradient(to top, transparent, rgba(255, 172, 83, 0.82));
+}
+
 @keyframes christmas-glow {
   from { opacity: 0.58; filter: brightness(0.88); }
   to { opacity: 1; filter: brightness(1.18); }
@@ -122,6 +167,19 @@ body {
 @keyframes christmas-twinkle {
   0%, 100% { opacity: 0; transform: scale(0.55); }
   45%, 60% { opacity: 0.72; transform: scale(1); }
+}
+
+@keyframes ember-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -3vh, 0) rotate(-12deg);
+  }
+  8% { opacity: 0.78; }
+  78% { opacity: 0.62; }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--ember-drift), 112vh, 0) rotate(18deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
